@@ -18,6 +18,13 @@ public class TestController {
     @RequestMapping("/tt")
     @ResponseBody
     public String tt() {
-        return "test:" + testService.getName().size();
+        String result = "";
+        try {
+            result = "test:" + testService.getName().size();
+        } catch (Exception e) {
+            System.out.println("error");
+        }
+
+        return result;
     }
 }
