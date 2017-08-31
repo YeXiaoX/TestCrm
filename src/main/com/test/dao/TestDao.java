@@ -2,6 +2,7 @@ package test.dao;
 
 
 
+import org.apache.ibatis.annotations.Param;
 import test.Dto.Cust;
 import test.annotation.DBRouting;
 
@@ -18,4 +19,10 @@ public interface TestDao {
 
     @DBRouting(name = "hehe")
     public List<Cust> getSize();
+
+    @DBRouting(name = "insertCust")
+    public void insertCust(Cust cust);
+
+
+
 }

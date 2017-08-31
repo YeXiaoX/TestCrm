@@ -10,4 +10,5 @@ import java.util.List;
 public interface TestService {
      List<Cust> getName();
      List<Cust> getSize();
+     void insertCust(Cust cust);
 }

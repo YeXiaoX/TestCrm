@@ -3,10 +3,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="test.dao.TestDao">
     <cache type="test.mybatis.MyBatisRedisCache"/>
-    <select id="getName" parameterType="test.Dto.TTest" resultType="test.Dto.Cust">
-        select cust_id custId,cust_name custName from zz_t_name where cust_id > #{id}
+    <select id="getName" parameterType="test.Dto.Cust" resultType="test.Dto.Cust">
+        select cust_id custId,cust_name custName from zz_t_name
     </select>
     <select id="getSize" resultType="test.Dto.Cust">
         select cust_id custId,cust_name custName from zz_t_name
     </select>
+    <insert id="insertCust" parameterType="test.Dto.Cust">
+        insert into ${tableName} (cust_id,cust_name,create_time) values (#{custId},#{custName},now())
+    </insert>
 </mapper>

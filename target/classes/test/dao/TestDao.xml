@@ -9,4 +9,7 @@
     <select id="getSize" resultType="test.Dto.Cust">
         select cust_id custId,cust_name custName from zz_t_name
     </select>
+    <insert id="insertCust" parameterType="test.Dto.Cust">
+        insert into ${tableName} (cust_id,cust_name,create_time) values (#{custId},#{custName},now())
+    </insert>
 </mapper>

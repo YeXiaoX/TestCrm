@@ -10,7 +10,7 @@ public class Cust implements Serializable {
     private static final long serialVersionUID = -6550898475486088675L;
     private Integer custId;
     private String custName;
-
+    private String tableName;
     public Integer getCustId() {
         return custId;
     }
@@ -25,5 +25,13 @@ public class Cust implements Serializable {
 
     public void setCustName(String custName) {
         this.custName = custName;
+    }
+
+    public String getTableName() {
+        return tableName;
+    }
+
+    public void setTableName(String tableName) {
+        this.tableName = tableName;
     }
 }

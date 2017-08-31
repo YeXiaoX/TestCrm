@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="test.dao.DistributeTableDao">
+    <update id="createTable" parameterType="java.lang.String">
+  CREATE table ${tableName}
+</update>
+
+    <select id="getTableByCondition" parameterType="test.query.DistributeTableQuery"
+            resultType="test.Dto.DistributeTable">
+        select id id,table_name tableName,table_init_sql tableInitSql,parent_id parentId from distribute_table
+        <where>
+            1=1
+            <if test="tableName != null and tableName != ''">
+                and table_name like '%${tableName}%'
+            </if>
+            <if test="id!=null">
+                and id=#{id}
+            </if>
+            <if test="parentId != null">
+                and parent_id = #{parentId}
+            </if>
+        </where>
+    </select>
+
+    <select id="getTableCount" parameterType="test.query.DistributeTableQuery" resultType="java.lang.Integer">
+        select count(1) from ${tableName}
+    </select>
+</mapper>
