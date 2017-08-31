@@ -26,4 +26,8 @@
     <select id="getTableCount" parameterType="test.query.DistributeTableQuery" resultType="java.lang.Integer">
         select count(1) from ${tableName}
     </select>
+
+    <insert id="insertTable" parameterType="test.Dto.DistributeTable">
+        insert into distribute_table (table_name,parent_id,create_time) values(#{tableName},#{parentId},now())
+    </insert>
 </mapper>

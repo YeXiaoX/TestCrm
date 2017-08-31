@@ -8,6 +8,7 @@ public class DistributeTable {
     private String tableName;
     private String tableInitSql;
     private Integer parentId;
+    private Integer count;
 
     public Integer getId() {
         return id;
@@ -39,5 +40,13 @@ public class DistributeTable {
 
     public void setParentId(Integer parentId) {
         this.parentId = parentId;
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
     }
 }

@@ -1,5 +1,6 @@
 package test.service.Impl;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import test.Dto.Cust;
@@ -33,16 +34,35 @@ public class TestServiceImpl implements TestService {
         DistributeTableQuery query = new DistributeTableQuery();
         query.setTableName("zz_t_name");
         int count = distributeTableDao.getTableCount(query);
-        if (count > 3) {
+        String tableName = "";
+        if (count >= 3) {
             List<DistributeTable> tables = distributeTableDao.getTableByCondition(query);
-            String initSql = "zz_t_name_1 ";
+            String initSql = "zz_t_name_";
+            String temp = "";
+            int num = 0;
+            int parentId = 0;
             for (DistributeTable table : tables) {
                 if (table.getParentId() == -1) {
-                    initSql += table.getTableInitSql();
+                    temp = table.getTableInitSql();
+                    parentId = table.getId();
+                } else {
+                    num++;
+                    query.setTableName(table.getTableName());
+                    count = distributeTableDao.getTableCount(query);
+                    if (count < 3) {
+                        tableName = table.getTableName();
+                    }
                 }
             }
-            distributeTableDao.createTable(initSql);
-            cust.setTableName("zz_t_name_1");
+            if (StringUtils.isEmpty(tableName)) {
+                tableName = initSql + num;
+                distributeTableDao.createTable(tableName+" "+temp);
+                DistributeTable table = new DistributeTable();
+                table.setParentId(parentId);
+                table.setTableName(tableName);
+                distributeTableDao.insertTable(table);
+            }
+            cust.setTableName(tableName);
             testDao.insertCust(cust);
         } else {
             cust.setTableName("zz_t_name");

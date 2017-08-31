@@ -12,14 +12,15 @@ import java.util.List;
  */
 public interface DistributeTableDao {
     @DBRouting(name = "create table")
-    public void createTable(@Param("tableName")String tableName);
+    public void createTable(@Param("tableName") String tableName);
 
-    @DBRouting(name="getTable")
+    @DBRouting(name = "getTable")
     public List<DistributeTable> getTableByCondition(DistributeTableQuery query);
 
 
-    @DBRouting(name="getTableCount")
+    @DBRouting(name = "getTableCount")
     public int getTableCount(DistributeTableQuery query);
 
-
+    @DBRouting(name = "insertTable")
+    public void insertTable(DistributeTable table);
 }
